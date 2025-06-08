@@ -1,0 +1,18 @@
+.explainability-container {
+  padding: 4rem 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.explainability-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #2d2f39;
+}
+
+.explainability-container p {
+  font-size: 1.2rem;
+  color: #555;
+} 
