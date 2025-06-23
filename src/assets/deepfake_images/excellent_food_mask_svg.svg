@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 650" width="1026" height="651">
+	<title>excellent_food_mask</title>
+	<defs>
+		<image  width="128" height="45" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAAAtCAMAAABRYpPJAAAAAXNSR0IB2cksfwAAAS9QTFRFAAAADQ0NPT09QEBAPDw8IyMjCQkJAQEBHBwcUFBQh4eHysrK////8fHx2dnZwMDAp6enjo6OgICAGRkZKSkpg4ODsrKy5+fn2traEhISJSUlqamp/v7+0dHRDw8POzs7pqamzs7OaGho9vb20tLSISEhNjY29PT0Ly8vdHR08vLyRkZGmpqaICAgHx8fl5eXZWVlycnJNDQ0TExMwcHB+fn5REREubm59fX1AwMDR0dHnZ2dYmJit7e3qKio7u7ugoKCJycn6+vrKioqGBgYSkpKxMTEHR0dsLCwFhYWS0tLf39/tLS06enpX19fLCwsFRUVampqrKys7e3tcXFxMDAwPz8/SUlJioqKzc3N7+/vyMjIDg4OMTExV1dX3NzcCAgINTU139/f7OzsaWlpxUunMgAAAGV0Uk5TAEX/////IQD//////////////+X//////33/////Wf//////////////////////////////////AP/////////////R/////7X///////+n//////////////9S////G/////9cxt/3AAAB8UlEQVR4nM2YzUsCQRiH3xfD9RCh0fcHa4eosEzsElFUJlSXij7o0qH/LAi6VAbVpbp4qkg0CepQhJESIRQZUZFhNlO762prCZv7+hxcd5T5Pb4z6swgaICIWs26Yf0ms1uEtx9JFixWvOzA+8d7pUE2Aaj6ABPic/HCVZQnhdssAUYDPrJHa8IQAQAbRhUB/vHFp4o7g6IlqjEiCzDEsrix8Yy6S0WgFfHG8HyVQDtK40Ek4EC8IsgHW0wSEK+dEQqBRssJSHOgi6QCkH4uGQHXJYlAa1gScF8Y9vunLVDzQhGfGQKzmSZfqUDPOZGAXIGWd5IZwGgPcoEmqni1AM23gL4CHRgA7IhRxbOyO44Ae0+pBBglIdBGsBaSsCbIK4Cdh7QC4DygHAJG9z6xALhwIEwq4EYYDBELDAWJBeo/jNkQ5xWAYfaXQCoAI6lQmk6A780FkWJzKgl8X0V7iGZRIgkIb16/JxX4WhlZwUCTvpTqPGr0+LWoYVol7t9RH4iN7ykuiOjX0W/BqAX4bFTjtMfPdHRdEGnvpiKQm8/vp7b5swnE3X8I06rU2DqohyDXIcPcBsCMT7mdTQpJAbd0O02uAOQ9FM1vI7OAGLXU+nTMAdPjLwKFsojLf7zD07zKL9YEV51/qFxSXpleA/gEgGGDnfwcZ1wAAAAASUVORK5CYII="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="166" y="3"/>
+</svg>

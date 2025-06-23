@@ -1,13 +1,25 @@
 import React from 'react';
 import './ImageUploadPage.css';
 import wireframeFace from '../../assets/render_images/wireframe-face.png';
+import { useDispatch } from "react-redux";
+import { runFakeShieldDTE } from '../../Redux/FakeShield/Action';
 
 const ImageUploadPage = ({ onImageUpload }) => {
+
+  const dispatch = useDispatch();
+
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
-      onImageUpload(file);
-    }
+      dispatch(runFakeShieldDTE(file));
+      
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        
+        onImageUpload(reader.result); // Pass the base64 image string
+      };
+      reader.readAsDataURL(file);
+    }    
   };
 
   return (

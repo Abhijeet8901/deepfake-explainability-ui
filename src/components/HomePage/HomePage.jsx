@@ -15,7 +15,7 @@ const HomePage = () => {
       {!uploadedImage ? (
         <ImageUploadPage onImageUpload={handleImageUpload} />
       ) : (
-        <ExplainabilityPage image={uploadedImage} />
+        <ExplainabilityPage uploadedImage={uploadedImage} />
       )}
     </div>
   );
