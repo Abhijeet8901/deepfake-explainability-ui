@@ -74,22 +74,38 @@ const ExplainabilityPage = ({ uploadedImage }) => {
     <div className="explainability-container">
       <div className="images-section">
         <div className="image-block layered">
-          <h3 className="section-heading">Original Image with Tampered Regions</h3>
-          <p className="section-subtext">Pulsing areas on the image indicate where the AI model suspects manipulation.</p>
+          <h3 className="section-heading">🧐 Original Image with Suspected Tampering</h3>
+          {/* <p className="section-subtext">🔍 The glowing areas show where the AI thinks something's fishy.</p> */}
           <div className="image-stack">
             <img src={uploadedImage} alt="Uploaded" className="base-image" />
             <img src={fakeShieldData.mask} className="mask-layer" />
-
           </div>
+          {Object.keys(qwenData.explanations || {}).length > 0 && (
+            <p className="section-subtext">
+              👁️ Look at the <strong>
+                {(() => {
+                  const entities = Object.keys(qwenData.explanations || {});
+                  if (entities.length === 0) return '';
+                  if (entities.length === 1) return entities[0];
+                  return entities.slice(0, -1).join(', ') + ' and ' + entities[entities.length - 1];
+                })()}
+              </strong>
+            </p>
+
+          )}
+
         </div>
 
         <div className="image-block">
-          <h3 className="section-heading">What could have been</h3>
-          <p className="section-subtext">Use the slider below to compare the original image with the reconstructed version.</p>
+          <h3 className="section-heading">🧠 What AI Thinks It *Should* Look Like</h3>
+          {/* <p className="section-subtext">🖱️ Slide to compare the original and reconstructed versions.</p> */}
           <ReactBeforeSliderComponent
             firstImage={FIRST_IMAGE}
             secondImage={SECOND_IMAGE}
           />
+          <p className="section-subtext">
+            🔍 The AI cleaned up suspicious parts to show you what might have been real.
+          </p>
         </div>
       </div>
 
@@ -98,32 +114,62 @@ const ExplainabilityPage = ({ uploadedImage }) => {
           {/* Front - Complex */}
           <div className="flip-card-front">
             <div className="card-header-with-button">
-              <h2>Complex Explanation</h2>
+              <h2 className="section-title">🔬 Complex Explanation</h2>
               <button className="card-toggle-button" onClick={() => setShowSimplified(true)}>
                 View Simplified Explanations →
               </button>
             </div>
-            <pre className="explanation-text">{formatComplexExplanation(fakeShieldData.complex_explanation)}</pre>
+            {/* <pre className="explanation-text">{formatComplexExplanation(fakeShieldData.complex_explanation)}</pre> */}
+            <div className="complex-explanation-list">
+              {(() => {
+                const text = formatComplexExplanation(fakeShieldData.complex_explanation);
+                const splitIndex = text.indexOf('2.');
+                const part1 = text.slice(0, splitIndex).replace(/^1\.\s*/, '').trim();
+                const part2 = text.slice(splitIndex).replace(/^2\.\s*/, '').trim();
+
+                return (
+                  <>
+                    <div className="complex-explanation-card">
+                      <div className="complex-explanation-icon">🖼️</div>
+                      <div className="complex-explanation-text">
+                        <strong>Tampering Description:</strong><br />
+                        {part1}
+                      </div>
+                    </div>
+
+                    <div className="complex-explanation-card">
+                      <div className="complex-explanation-icon">🧠</div>
+                      <div className="complex-explanation-text">
+                        <strong>Why AI Thinks It's Fake:</strong><br />
+                        <pre>{part2}</pre>
+                      </div>
+                    </div>
+                  </>
+                );
+              })()}
+            </div>
           </div>
 
           {/* Back - Simplified */}
           <div className="flip-card-back">
             <div className="card-header-with-button">
-              <h2>Simplified Explanations</h2>
+              <h2 className="section-title">✨ Simplified Explanations</h2>
               <button className="card-toggle-button" onClick={() => setShowSimplified(false)}>
                 ← Back to Complex Explanation
               </button>
             </div>
             <div className="entity-explanation-header">
-              <span>Tampered Region</span>
-              <span>Simplified Reason (Why this region looks tampered)</span>
+              <span>🎯 Tampered Region</span>
+              <span>🧠 Why It Feels Off</span>
             </div>
             <div className="simplified-pair-container">
-              {qwenData.simple_explanation &&
-                Object.entries(qwenData.simple_explanation).map(([entity, explanation], idx) => (
+              {Object.keys(qwenData.explanations || {}).length > 0 &&
+                Object.entries(qwenData.explanations).map(([entity, {simple_explanation, emoji}], idx) => (
                   <div className="entity-explanation-pair" key={idx}>
-                    <div className="entity-card">{entity}</div>
-                    <div className="explanation-card">{explanation}</div>
+                    <div className="entity-card">
+                      <span className="emoji">{emoji || '🕵️'}</span> {entity}
+                    </div>
+                    <div className="explanation-card">{simple_explanation}</div>
                   </div>
                 ))}
             </div>

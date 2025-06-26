@@ -5,7 +5,7 @@ import {
 } from "./ActionType"
 
 const initialState = {
-    simple_explanation: null,
+    explanations: {},
     edit_instructions: null,
     loading: false,
     error: null
@@ -16,7 +16,7 @@ export const qwenReducer = (state = initialState, action) => {
         case RUN_QWEN_REQUEST:
             return { ...state, loading: true }
         case RUN_QWEN_SUCCESS:
-            return { ...state, loading: false, simple_explanation: processQwenExplanations(action.payload), edit_instructions: processQwenEditInstructions(action.payload)}
+            return { ...state, loading: false, explanations: processQwenExplanations(action.payload), edit_instructions: processQwenEditInstructions(action.payload)}
         case RUN_QWEN_FAILURE:
             return { ...state, loading: false, error: action.payload.error}
         default:
@@ -70,7 +70,11 @@ const processQwenExplanations = (json_str) => {
 
     for (const [key, value] of Object.entries(data)) {
       if (value && typeof value === 'object' && value.simple_explanation) {
-        result[key] = value.simple_explanation;
+        result[key] = {
+          simple_explanation: value.simple_explanation?.trim() || '',
+          edit_instruction: value.edit_instruction?.trim() || '',
+          emoji: value.emoji || '🕵️'
+        }
       }
     }
 
