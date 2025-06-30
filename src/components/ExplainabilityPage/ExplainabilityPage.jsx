@@ -1,42 +1,12 @@
 import React, { useState, useEffect} from 'react';
 import './ExplainabilityPage.css';
 import { useDispatch, useSelector } from "react-redux";
-import { runQwen } from '../../Redux/Qwen/Action';
-import { runFakeShieldMFLM } from '../../Redux/FakeShield/Action';
 import { runStep1X } from '../../Redux/Step1X/Action';
 import ReactBeforeSliderComponent from 'react-before-after-slider-component';
 import 'react-before-after-slider-component/dist/build.css';
+import { HelperUtilities } from '../../utilities/HelperUtilities';
 
 const ExplainabilityPage = ({ uploadedImage }) => {
-
-  function dataURLtoFile(dataurl, filename) {
-    const [header, b64] = dataurl.split(',');
-    const mime = header.match(/:(.*?);/)[1];
-    const binary = atob(b64);
-    const len = binary.length;
-    const u8arr = new Uint8Array(len);
-    for (let i = 0; i < len; i++) {
-      u8arr[i] = binary.charCodeAt(i);
-    }
-    return new File([u8arr], filename, { type: mime });
-  }
-
-  const formatComplexExplanation = (text) => {
-    if (!text) return "";
-
-    const lines = text.split('\n');
-    const formattedLines = lines.map(line => {
-      if (line.startsWith("1. Whether the picture has been tampered with")) {
-        const parts = line.split(":");
-        if (parts.length > 1) {
-          return "1." + parts.slice(1).join(":").trim();
-        }
-      }
-      return line;
-    });
-
-    return formattedLines.join('\n');
-  };
 
   const {qwenData} = useSelector((store) => store);  
   const {fakeShieldData} = useSelector((store) => store);
@@ -46,18 +16,9 @@ const ExplainabilityPage = ({ uploadedImage }) => {
 
   const [showSimplified, setShowSimplified] = useState(false);
 
-  useEffect(() => {
-    if (fakeShieldData.complex_explanation) {
-
-      const file = dataURLtoFile(uploadedImage, "upload.png");
-      dispatch(runFakeShieldMFLM(file, fakeShieldData.complex_explanation));
-      dispatch(runQwen(file, fakeShieldData.complex_explanation));
-    }
-  }, [fakeShieldData.complex_explanation]);   
-
   useEffect(()=> {
     if(qwenData.edit_instructions) {
-      const file = dataURLtoFile(uploadedImage, "upload.png");
+      const file = HelperUtilities.dataURLtoFile(uploadedImage, "upload.png");
       dispatch(runStep1X(file, qwenData.edit_instructions))
     }
   }, [qwenData.edit_instructions])
@@ -69,6 +30,8 @@ const ExplainabilityPage = ({ uploadedImage }) => {
   const SECOND_IMAGE = {
     imageUrl: step1XData.generated_image 
   }
+
+  const isImageReady = !!step1XData.generated_image;
 
   return (
     <div className="explainability-container">
@@ -98,14 +61,29 @@ const ExplainabilityPage = ({ uploadedImage }) => {
 
         <div className="image-block">
           <h3 className="section-heading">🧠 What AI Thinks It *Should* Look Like</h3>
-          {/* <p className="section-subtext">🖱️ Slide to compare the original and reconstructed versions.</p> */}
-          <ReactBeforeSliderComponent
+          {isImageReady ? (
+            <ReactBeforeSliderComponent firstImage={FIRST_IMAGE} secondImage={SECOND_IMAGE} />
+          ) : (
+            <div className="reconstruction-loading-wrapper">
+              <img src={uploadedImage} alt="Uploaded" className="background-image" />
+              <div className="reconstruction-overlay">
+                <div className="shimmer-layer"></div>/
+              </div>
+            </div>
+          )}
+
+          <p className="section-subtext">
+            {isImageReady
+              ? "🔍 The AI cleaned up suspicious parts to show you what might have been real."
+              : "⏳ Reconstructing the untampered version..."}
+          </p>
+          {/* <ReactBeforeSliderComponent
             firstImage={FIRST_IMAGE}
             secondImage={SECOND_IMAGE}
           />
           <p className="section-subtext">
             🔍 The AI cleaned up suspicious parts to show you what might have been real.
-          </p>
+          </p> */}
         </div>
       </div>
 
@@ -122,7 +100,7 @@ const ExplainabilityPage = ({ uploadedImage }) => {
             {/* <pre className="explanation-text">{formatComplexExplanation(fakeShieldData.complex_explanation)}</pre> */}
             <div className="complex-explanation-list">
               {(() => {
-                const text = formatComplexExplanation(fakeShieldData.complex_explanation);
+                const text = HelperUtilities.formatComplexExplanation(fakeShieldData.complex_explanation);
                 const splitIndex = text.indexOf('2.');
                 const part1 = text.slice(0, splitIndex).replace(/^1\.\s*/, '').trim();
                 const part2 = text.slice(splitIndex).replace(/^2\.\s*/, '').trim();

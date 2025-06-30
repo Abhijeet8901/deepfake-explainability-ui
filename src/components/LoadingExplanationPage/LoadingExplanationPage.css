@@ -1,0 +1,78 @@
+.loading-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  gap: 1.5rem;
+  background: #f5f7fa;
+  padding: 2rem;
+}
+
+.loading-image-wrapper {
+  position: relative;
+  width: 60vw;
+  max-width: 600px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.loading-image {
+  width: 100%;
+  /* filter: grayscale(1) brightness(0.8); */
+  display: block;
+}
+
+/* .scan-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 45%,
+    rgba(58, 120, 242, 0.15) 50%,
+    transparent 55%
+  );
+  animation: scan 2.5s infinite ease-in-out;
+  pointer-events: none;
+} */
+
+.scan-overlay {
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  animation: scan-diagonal 2.5s infinite linear;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* @keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+} */
+@keyframes scan-diagonal {
+  0% {
+    transform: translate(-100%, -100%);
+  }
+  100% {
+    transform: translate(100%, 100%);
+  }
+}
+
+.loading-text {
+  font-size: 1.25rem;
+  color: #333;
+  text-align: center;
+}
