@@ -1,0 +1,244 @@
+/* Flip Card Layout */
+.flip-card-container {
+  perspective: 1000px;
+}
+
+.flip-card {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;  
+  transition: transform 0.8s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* width: 100%; */
+  backface-visibility: hidden;
+  background: linear-gradient(to bottom right, #f9fbff, #ffffff);
+  border-radius: 20px;
+  font-size: 1.05rem;
+  color: #333;
+  transition: transform 0.8s ease;
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  max-height: 600px;
+  overflow-y: auto;
+  margin-top: 3rem;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  padding: 3rem 2rem 0rem;
+}
+
+/* Header with Button */
+.card-header-with-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.card-toggle-button {
+  background-color: #3a78f2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card-toggle-button:hover {
+  background-color: #2e63d5;
+}
+
+.explanation-text {
+  white-space: pre-wrap;
+  line-height: 1.7;
+  color: #444;
+  font-size: 1rem;
+}
+
+/* Simplified Card Pair Layout */
+.simplified-pair-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #2c2c2c;
+  text-align: center;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.3px;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.04);
+}
+
+.entity-explanation-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #444;
+  margin: 1rem 0 0.7rem;
+  padding: 0 1.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.6rem;
+}
+
+.entity-explanation-header span:first-child {
+  flex: 0 0 220px;
+  text-align: center;
+}
+
+.entity-explanation-header span:last-child {
+  flex: 1;
+  text-align: center;
+}
+
+
+.entity-explanation-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: stretch;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.06);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-left: 6px solid #facc15; /* yellow accent */
+}
+
+@media (max-width: 768px) {
+  .entity-explanation-pair {
+    flex-direction: column;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+
+.entity-card {
+  background: linear-gradient(to right, #e0f7fa, #b2ebf2);
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #006064;
+  flex: 0 0 200px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.6rem;
+  box-shadow: 0 4px 10px rgba(0, 96, 100, 0.1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
+
+.explanation-card {
+  background: #fdf6ec;
+  padding: 1.25rem 1.5rem;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #5d4037;
+  flex: 1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.explanation-card::before {
+  content: "💡";
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+/* Responsive Fixes */
+@media (max-width: 768px) {
+  .entity-explanation-pair {
+    flex-direction: column;
+  }
+  .entity-card {
+    flex: 1;
+    justify-content: flex-start;
+  }
+}
+
+.entity-card:hover,
+.explanation-card:hover {
+  box-shadow: 0 0 12px rgba(58, 120, 242, 0.15);
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+.entity-card span.emoji {
+  /* background-color: rgba(255, 255, 255, 0.4); */
+  border-radius: 50%;
+  padding: 0.3rem;
+  font-size: 1.6rem;
+}
+
+
+.complex-explanation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.complex-explanation-card {
+  display: flex;
+  align-items: flex-start;
+  background: #f8fafc;
+  padding: 1.2rem 1.5rem;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.03);
+  gap: 1rem;
+  border-left: 5px solid #3b82f6;
+}
+
+.complex-explanation-icon {
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+.complex-explanation-text {
+  font-size: 0.97rem;
+  color: #1e293b;
+  line-height: 1.7;
+}
+
+.complex-explanation-text pre {
+  white-space: pre-wrap;
+  font-family: inherit;
+  margin: 0.5rem 0 0;
+  line-height: 1.6;
+  color: #374151;
+}

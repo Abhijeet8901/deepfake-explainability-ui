@@ -1,0 +1,71 @@
+.survey-card {
+  background: #fffdfc;
+  padding: 1.75rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  font-family: 'Inter', sans-serif;
+  margin-top: 2rem;
+  max-width: 100%;
+}
+
+.survey-card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0;
+  line-height: 1.4;
+  height: 60px;
+}
+
+.survey-card-likert-scale {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.75rem;
+  gap: 0.5rem;
+}
+
+.survey-card-likert-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1rem;
+  color: #333;
+}
+
+.survey-card-likert-option input {
+  margin-bottom: 0.4rem;
+  cursor: pointer;
+}
+
+.survey-card-likert-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 0.5rem;
+}
+
+.survey-nav-inline {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.survey-nav-inline button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.survey-nav-inline button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}

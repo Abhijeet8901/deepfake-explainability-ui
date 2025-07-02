@@ -3,6 +3,7 @@ import './HomePage.css';
 import ImageUploadPage from '../ImageUploadPage/ImageUploadPage';
 import ExplainabilityPage from '../ExplainabilityPage/ExplainabilityPage';
 import LoadingExplanationPage from '../LoadingExplanationPage/LoadingExplanationPage';
+import SurveyPage from '../SurveyPage/SurveyPage';
 import { useSelector } from "react-redux";
 
 const HomePage = () => {
@@ -24,7 +25,7 @@ const HomePage = () => {
       ) : !qwenDataLoaded ? (
         <LoadingExplanationPage uploadedImage={uploadedImage} />
       ) : (
-        <ExplainabilityPage uploadedImage={uploadedImage} />
+        <SurveyPage uploadedImage={uploadedImage} />
       )
       }
     </div>

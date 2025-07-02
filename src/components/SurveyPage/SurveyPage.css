@@ -1,25 +1,25 @@
 /* Root Container */
-.explainability-container {
-  padding: 4rem 2rem;
+.survey-container {
+  padding: 1rem 2rem 0rem;
   font-family: 'Inter', sans-serif;
   /* background-color: #fafafa; */
-  min-height: 100vh;
+  margin: 0 auto;           /* ✅ Center horizontally */
 }
 
 /* Section Headings and Subtext */
-.section-heading {
+.survey-section-heading {
   font-size: 1.5rem;
+  margin-top: 0px;
   margin-bottom: 0.4rem;
   color: #1a1a1a;
   font-weight: 700;
   text-align: center;
-  height: 60px 
 }
 
-.section-subtext {
+.survey-section-subtext {
   font-size: 1rem;
   color: #666;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
   text-align: center;
   min-width: 540px;
   max-width: 700px;
@@ -28,7 +28,7 @@
 }
 
 /* Image Section */
-.image-stack {
+.survey-image-stack {
   position: relative;
   width: 100%;
 }
@@ -41,14 +41,14 @@
   flex-wrap: wrap;
 }
 
-.image-block {
+.survey-image-block {
   flex: 1 1 45%;
   max-width: 800px;
   text-align: center;
 }
 
-.image-block img,
-.base-image {
+.survey-image-block img,
+.survey-base-image {
   width: 100%;  
   height: 400px;
   object-fit: cover;
@@ -64,7 +64,7 @@
 }
 
 /* Mask overlay */
-.mask-layer {
+.survey-mask-layer {
   position: absolute;
   top: 0;
   left: 0;
@@ -138,3 +138,69 @@
     transform: translate(100%, 100%);
   }
 }
+
+
+.survey-content-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 90vw;
+}
+
+.survey-image-stack-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 45%;
+  max-width: 600px;
+}
+
+.explanation-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  flex: 1 1 50%;
+}
+
+/* Optional: Prevent squishing on smaller screens */
+@media (max-width: 1024px) {
+  .survey-content-wrapper {
+    flex-direction: column;
+  }
+
+  .survey-image-stack-column,
+  .explanation-column {
+    max-width: 100%;
+  }
+}
+
+.survey-card-container {
+  margin: 630px auto 0;
+  width: 100%;
+  padding: 0 1rem; /* safe padding for small screens */
+  box-sizing: border-box;
+  max-width: 1100px;
+}
+
+@media (max-width: 1024px) {
+  .survey-content-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .survey-image-stack-column,
+  .explanation-column {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .flip-card-container,
+  .flip-card {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 1rem;
+  }
+}
+
