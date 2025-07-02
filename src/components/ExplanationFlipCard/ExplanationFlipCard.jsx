@@ -71,7 +71,7 @@ const ExplanationFlipCard = () => {
               className="card-toggle-button"
               onClick={() => setShowSimplified(false)}
             >
-              ← Back to Complex Explanation
+              ← View Complex Explanation
             </button>
           </div>
           <div className="entity-explanation-header">

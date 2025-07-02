@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./SurveyPage.css";
-import { useDispatch, useSelector } from "react-redux";
-import { runStep1X } from "../../Redux/Step1X/Action";
+import { useSelector } from "react-redux";
 import ReactBeforeSliderComponent from "react-before-after-slider-component";
 import "react-before-after-slider-component/dist/build.css";
-import { HelperUtilities } from "../../utilities/HelperUtilities";
 import ExplanationFlipCard from "../ExplanationFlipCard/ExplanationFlipCard";
 import SurveyCard from "../SurveyCard/SurveyCard";
 import { SurveyImageQuestions } from "../../constants/SurveyQuestions";
 
-const SurveyPage = ({ uploadedImage }) => {
+const SurveyPage = ({ currentImage, currentImageIndex, onSubmitImage }) => {
   const { qwenData } = useSelector((store) => store);
   const { fakeShieldData } = useSelector((store) => store);
   const { step1XData } = useSelector((store) => store);
-
-  const dispatch = useDispatch();
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const currentQuestion = SurveyImageQuestions[currentQuestionIndex];
@@ -27,6 +23,9 @@ const SurveyPage = ({ uploadedImage }) => {
     }));
   };
 
+  const allAnswered =
+    Object.keys(answers).length === SurveyImageQuestions.length;
+
   const handleNext = () => {
     if (currentQuestionIndex < SurveyImageQuestions.length - 1)
       setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -37,15 +36,8 @@ const SurveyPage = ({ uploadedImage }) => {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
   };
 
-  useEffect(() => {
-    if (qwenData.edit_instructions) {
-      const file = HelperUtilities.dataURLtoFile(uploadedImage, "upload.png");
-      dispatch(runStep1X(file, qwenData.edit_instructions));
-    }
-  }, [qwenData.edit_instructions]);
-
   const FIRST_IMAGE = {
-    imageUrl: uploadedImage
+    imageUrl: currentImage
   };
 
   const SECOND_IMAGE = {
@@ -65,7 +57,7 @@ const SurveyPage = ({ uploadedImage }) => {
             </h3>
             <div className="survey-image-stack">
               <img
-                src={uploadedImage}
+                src={currentImage}
                 alt="Uploaded"
                 className="survey-base-image"
               />
@@ -102,7 +94,7 @@ const SurveyPage = ({ uploadedImage }) => {
             ) : (
               <div className="reconstruction-loading-wrapper">
                 <img
-                  src={uploadedImage}
+                  src={currentImage}
                   alt="Uploaded"
                   className="background-image"
                 />
@@ -124,18 +116,31 @@ const SurveyPage = ({ uploadedImage }) => {
           <ExplanationFlipCard />
           <div className="survey-card-container">
             <SurveyCard
-                question={currentQuestion.question}
-                description={currentQuestion.description}
-                type={currentQuestion.type}
-                options={currentQuestion.options}
-                value={answers[currentQuestionIndex] || null}
-                onChange={handleAnswerChange}
-                onPrev={handlePrev}
-                onNext={handleNext}
-                disablePrev={currentQuestionIndex === 0}
-                disableNext={currentQuestionIndex === SurveyImageQuestions.length - 1}
+              question={currentQuestion.question}
+              description={currentQuestion.description}
+              type={currentQuestion.type}
+              options={currentQuestion.options}
+              value={answers[currentQuestionIndex] || null}
+              onChange={handleAnswerChange}
+              onPrev={handlePrev}
+              onNext={handleNext}
+              disablePrev={currentQuestionIndex === 0}
+              disableNext={
+                currentQuestionIndex === SurveyImageQuestions.length - 1
+              }
             />
           </div>
+          <button
+            className="survey-submit-button"
+            disabled={!allAnswered}
+            onClick={() => {
+              onSubmitImage(answers);
+              setAnswers({});
+              setCurrentQuestionIndex(0);
+            }}
+          >
+            Submit & Next →
+          </button>
         </div>
       </div>
     </div>

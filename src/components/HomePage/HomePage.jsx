@@ -1,33 +1,71 @@
-import React, { useState } from 'react';
-import './HomePage.css';
-import ImageUploadPage from '../ImageUploadPage/ImageUploadPage';
-import ExplainabilityPage from '../ExplainabilityPage/ExplainabilityPage';
-import LoadingExplanationPage from '../LoadingExplanationPage/LoadingExplanationPage';
-import SurveyPage from '../SurveyPage/SurveyPage';
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import "./HomePage.css";
+import SurveyPage from "../SurveyPage/SurveyPage";
+import { useSelector, useDispatch } from "react-redux";
+import { surveyData } from "../../surveyData";
+import { PRELOAD_SURVEY_DATA } from "../../Redux/Store";
+import { logImageAnswers } from "../../utilities/SurveyLogger";
 
 const HomePage = () => {
-  const [uploadedImage, setUploadedImage] = useState(null);
+  const [currentImage, setCurrentImage] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [answeredImages, setAnsweredImages] = useState({});
 
-  const { explanations: qwenExplanations} = useSelector((store) => store.qwenData);
+  const dispatch = useDispatch();
 
-  const qwenDataLoaded = Object.keys(qwenExplanations || {}).length > 0;
+  useEffect(() => {
+    const preload = async () => {
 
-  const handleImageUpload = (file) => {
-    setUploadedImage(file);
-  };
+      const complexText = await fetch(surveyData[currentImageIndex].complexExplanation).then((res) =>
+        res.text()
+      );
+      const simplifiedText = await fetch(surveyData[currentImageIndex].simplifiedExplanation).then((res) =>
+        res.text()
+      );
+
+      dispatch({
+        type: PRELOAD_SURVEY_DATA,
+        currentImage: {
+          reconstructedImage: surveyData[currentImageIndex].reconstructedImage,
+          simplifiedExplanation: simplifiedText,
+          complexExplanation: complexText
+        }
+      });
+
+      setCurrentImage(surveyData[currentImageIndex].originalImage);
+    };
+
+    preload();
+  }, [currentImageIndex]);
+
+  const onSubmitImage = async (answers) => {
+    setAnsweredImages(prev => ({
+      ...prev,
+      [currentImageIndex]: answers
+    }));
+
+    if (currentImageIndex < surveyData.length - 1) {
+      setCurrentImageIndex(currentImageIndex + 1);
+    } else {
+      // optionally move to final questions
+    }
+
+    await logImageAnswers({
+      participantId: "participant_123",
+      imageIndex: surveyData[currentImageIndex].imageIndex,
+      answers
+    });
+
+  }
 
 
   return (
     <div className="home-container">
-      {!uploadedImage ? (
-        <ImageUploadPage onImageUpload={handleImageUpload} />
-      ) : !qwenDataLoaded ? (
-        <LoadingExplanationPage uploadedImage={uploadedImage} />
-      ) : (
-        <SurveyPage uploadedImage={uploadedImage} />
-      )
-      }
+      <SurveyPage 
+        currentImage={currentImage}
+        currentImageIndex={currentImageIndex}
+        onSubmitImage={onSubmitImage}
+      />
     </div>
   );
 };

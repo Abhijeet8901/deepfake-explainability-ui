@@ -1,0 +1,9 @@
+```json
+{
+  "Baseball player": {
+    "simple_explanation": "The baseball player looks like they were cut out from another photo and placed here. Their body doesn't fit well with the rest of the scene, and their shadow doesn't match.",
+    "edit_instruction": "Remove the baseball player from the image.",
+    "emoji": "🏃‍♂️"
+  }
+}
+```

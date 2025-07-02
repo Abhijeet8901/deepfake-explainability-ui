@@ -1,3 +1,4 @@
+import { PRELOAD_SURVEY_DATA } from "../Store"
 import { 
     RUN_FAKESHIELD_DTE_FAILURE, 
     RUN_FAKESHIELD_DTE_REQUEST, 
@@ -28,7 +29,9 @@ export const fakeShieldReducer = (state = initialState, action) => {
         case RUN_FAKESHIELD_MFLM_SUCCESS:
             return { ...state, loading: false, label: action.payload.label, mask: action.payload.mask }
         case RUN_FAKESHIELD_MFLM_FAILURE:
-            return { ...state, loading: false, error: action.payload }               
+            return { ...state, loading: false, error: action.payload }
+        case PRELOAD_SURVEY_DATA:
+            return { ...state, complex_explanation: action.currentImage.complexExplanation }                           
         default:
             return state;
     }

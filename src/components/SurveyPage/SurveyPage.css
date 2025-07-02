@@ -160,7 +160,7 @@
 .explanation-column {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  /* gap: 2rem; */
   flex: 1 1 50%;
 }
 
@@ -177,7 +177,7 @@
 }
 
 .survey-card-container {
-  margin: 630px auto 0;
+  margin: 650px auto 0;
   width: 100%;
   padding: 0 1rem; /* safe padding for small screens */
   box-sizing: border-box;
@@ -203,4 +203,28 @@
     margin-top: 1rem;
   }
 }
+
+.survey-submit-button {
+  align-self: flex-end;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
+.survey-submit-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.survey-submit-button:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
 

@@ -1,3 +1,4 @@
+import { PRELOAD_SURVEY_DATA } from "../Store"
 import { 
     RUN_QWEN_FAILURE, 
     RUN_QWEN_REQUEST, 
@@ -19,6 +20,8 @@ export const qwenReducer = (state = initialState, action) => {
             return { ...state, loading: false, explanations: processQwenExplanations(action.payload), edit_instructions: processQwenEditInstructions(action.payload)}
         case RUN_QWEN_FAILURE:
             return { ...state, loading: false, error: action.payload.error}
+        case PRELOAD_SURVEY_DATA:
+            return { ...state, explanations: processQwenExplanations(action.currentImage.simplifiedExplanation), edit_instructions: processQwenEditInstructions(action.currentImage.simplifiedExplanation)}                 
         default:
             return state;
     }

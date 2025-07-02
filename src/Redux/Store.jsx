@@ -4,6 +4,8 @@ import {fakeShieldReducer} from "./FakeShield/Reducer"
 import {qwenReducer} from "./Qwen/Reducer"
 import { step1XReducer } from "./Step1X/Reducer"
 
+export const PRELOAD_SURVEY_DATA = 'PRELOAD_SURVEY_DATA';
+
 const rootReducers = combineReducers({
     fakeShieldData: fakeShieldReducer,
     qwenData: qwenReducer,
