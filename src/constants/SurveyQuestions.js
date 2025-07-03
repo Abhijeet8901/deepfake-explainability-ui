@@ -1,13 +1,13 @@
 export const SurveyImageQuestions = [
   {
     type: "scale10",
-    question: "Overall, how helpful was the complex explanation in understanding why the image might be fake or manipulated? (Consider factors such as ease of understanding, clarity, and accuracy.)",
-    labels: ["Not helpful at all", "Extremely helpful"],
+    question: "How helpful was the <u>complex explanation</u> in understanding why the image is a deepfake?",
+    labels: ["Ease of Understanding", "Clarity", "Accuracy"],
   },
   {
     type: "scale10",
-    question: "Overall, how helpful was the simplified explanation in understanding why the image might be fake or manipulated? (Consider factors such as ease of understanding, clarity, and accuracy.)",
-    labels: ["Not helpful at all", "Extremely helpful"],
+    question: "How helpful was the <u>simplified explanation</u> in understanding why the image is a deepfake?",
+    labels: ["Ease of Understanding", "Clarity", "Accuracy"],
   },
   {
     type: "binary",
@@ -16,7 +16,7 @@ export const SurveyImageQuestions = [
   },
   {
     type: "likert",
-    question: 'The "What Could Have Been" image improved my understanding of why the original image was manipulated.',
+    question: 'The reconstructed image shown below (labeled <i>"What AI Thinks It Should Look Like"</i>) helped me understand why the original image might be manipulated.',
     options: [
       "Strongly Disagree",
       "Disagree",
@@ -28,7 +28,7 @@ export const SurveyImageQuestions = [
   {
     type: "likert",
     question:
-      "Compared to the complex explanation, did the simplified explanation reduce the mental effort needed to understand why the image was manipulated?",
+      "Compared to the complex explanation, the simplified explanation reduce the mental effort needed to understand why the image was manipulated.",
     options: [
       "Strongly Disagree",
       "Disagree",

@@ -1,26 +1,50 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyliDFLaAOWLfjT1w_-V2Z4msmWfsmKkwo6tJjnVVNn_9_9qYVKVx4gU4ZsUjBi5GuL/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzaSNrkUmLP6TmSO5td7vllL6MYSCb-fBRlK1eT1gJM5B9kfX4nDyYH7HR6ucIWVCEO/exec";
 
 // Log answers for a single image
-export const logImageAnswers = async ({ participantId, imageIndex, answers }) => {
-  try {
-    const response = await fetch(SCRIPT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        participantId,
-        imageIndex,
-        answers,
-        type: "image"
-      })
-    });
 
-    const result = await response.json();
-    return result;
+export const logImageAnswers = async ({ participantId, imageIndex, answers }) => {
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: (
+        `participantId=${participantId}&imageIndex=${imageIndex}&type=image&` +
+        `answer0=${answers[0] || ""}&` +
+        `answer1=${answers[1] || ""}&` +
+        `answer2=${answers[2] || ""}&` +
+        `answer3=${answers[3] || ""}&` +
+        `answer4=${answers[4] || ""}`    
+      )
+    });
   } catch (err) {
     console.error("Error logging image answers:", err);
-    throw err;
   }
 };
+
+// export const logImageAnswers = async ({ participantId, imageIndex, answers }) => {
+//   try {
+//     const response = await fetch(SCRIPT_URL, {
+//       method: "POST",
+//       headers: { "Content-Type": "application/x-www-form-urlencoded" },
+//       body: (
+//         `participantId=${participantId}&imageIndex=${imageIndex}&type=image&` +
+//         `answer0=${answers[0] || ""}&` +
+//         `answer1=${answers[1] || ""}&` +
+//         `answer2=${answers[2] || ""}&` +
+//         `answer3=${answers[3] || ""}&` +
+//         `answer4=${answers[4] || ""}`    
+//       )
+//     });
+
+//     const result = await response.json();
+//     return result;
+//   } catch (err) {
+//     console.error("Error logging image answers:", err);
+//     throw err;
+//   }
+// };
+
 
 // Log final survey answers
 export const logToolAnswers = async ({ participantId, answers }) => {

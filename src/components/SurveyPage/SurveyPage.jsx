@@ -16,15 +16,30 @@ const SurveyPage = ({ currentImage, currentImageIndex, onSubmitImage }) => {
   const currentQuestion = SurveyImageQuestions[currentQuestionIndex];
 
   const [answers, setAnswers] = useState({});
-  const handleAnswerChange = (newValue) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [currentQuestionIndex]: newValue
-    }));
+  const handleAnswerChange = (newValue, type, index) => {
+    if (type === "scale10") {
+      const currVal = answers[currentQuestionIndex] || [null, null, null];
+      currVal[index] = newValue;
+      setAnswers((prev) => ({
+        ...prev,
+        [currentQuestionIndex]: currVal
+      }));
+    } else {
+      setAnswers((prev) => ({
+        ...prev,
+        [currentQuestionIndex]: newValue
+      }));
+    }
   };
 
-  const allAnswered =
-    Object.keys(answers).length === SurveyImageQuestions.length;
+  const allAnswered = SurveyImageQuestions.every((_, idx) => {
+    const ans = answers[idx];
+    if (Array.isArray(ans)) {
+      return ans.every((item) => item !== null && item !== undefined);
+    } else {
+      return ans !== null && ans !== undefined;
+    }
+  });
 
   const handleNext = () => {
     if (currentQuestionIndex < SurveyImageQuestions.length - 1)
@@ -117,10 +132,13 @@ const SurveyPage = ({ currentImage, currentImageIndex, onSubmitImage }) => {
           <div className="survey-card-container">
             <SurveyCard
               question={currentQuestion.question}
-              description={currentQuestion.description}
               type={currentQuestion.type}
               options={currentQuestion.options}
-              value={answers[currentQuestionIndex] || null}
+              labels={currentQuestion.labels}
+              value={
+                answers[currentQuestionIndex] ||
+                (currentQuestion.type === "scale10" ? [null, null, null] : null)
+              }
               onChange={handleAnswerChange}
               onPrev={handlePrev}
               onNext={handleNext}

@@ -177,11 +177,14 @@
 }
 
 .survey-card-container {
-  margin: 650px auto 0;
+  margin: 0 auto;
   width: 100%;
   padding: 0 1rem; /* safe padding for small screens */
   box-sizing: border-box;
   max-width: 1100px;
+  height: 360px;
+  display: grid;
+  align-items: end;;
 }
 
 @media (max-width: 1024px) {

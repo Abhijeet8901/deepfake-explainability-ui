@@ -1,15 +1,15 @@
-import React from 'react';
-import LikertScale from '../SurveyInputs/LikertScale';
-import OneToTenScale from '../SurveyInputs/OneToTenScale';
-import TwoChoice from '../SurveyInputs/TwoChoice';
-import TextResponse from '../SurveyInputs/TextResponse';
-import './SurveyCard.css';
+import React from "react";
+import LikertScale from "../SurveyInputs/LikertScale";
+import OneToTenScale from "../SurveyInputs/OneToTenScale";
+import TwoChoice from "../SurveyInputs/TwoChoice";
+import TextResponse from "../SurveyInputs/TextResponse";
+import "./SurveyCard.css";
 
 const SurveyCard = ({
   question,
-  description,
   type,
   options = [],
+  labels = [],
   onChange,
   value,
   onPrev,
@@ -17,16 +17,20 @@ const SurveyCard = ({
   disablePrev,
   disableNext
 }) => {
-  const renderInput = () => {
+  const renderInput = (label = null, index = null) => {
     switch (type) {
-      case 'likert':
-        return <LikertScale onChange={onChange} value={value} />;
-      case 'scale10':
-        return <OneToTenScale onChange={onChange} value={value} />;
-      case 'binary':
-        return <TwoChoice options={options} onChange={onChange} value={value} />;
-      case 'text':
-        return <TextResponse onChange={onChange} value={value} />;
+      case "likert":
+        return <LikertScale onChange={(number)=> onChange(number, type)} value={value} />;
+      case "scale10":
+        return (
+          <OneToTenScale onChange={(number)=> onChange(number, type, index)} value={value[index]} scaleLabel={label} />
+        );
+      case "binary":
+        return (
+          <TwoChoice options={options} onChange={(number)=> onChange(number, type)} value={value} />
+        );
+      case "text":
+        return <TextResponse onChange={(number)=> onChange(number, type)} value={value} />;
       default:
         return null;
     }
@@ -34,13 +38,24 @@ const SurveyCard = ({
 
   return (
     <div className="survey-card">
-      <h3 className="survey-card-title">{question}</h3>
+      <h3 className="survey-card-title" dangerouslySetInnerHTML={{ __html: question }}></h3>
       <div className="survey-card-input-wrapper">
-        {renderInput()}
+        {(() => {
+          if (labels.length === 0) return renderInput();
+          else {
+            return labels.map((label, index) => (
+              <React.Fragment key={index}>{renderInput(label, index)}</React.Fragment>
+            ));
+          }
+        })()}
       </div>
       <div className="survey-nav-inline">
-        <button onClick={onPrev} disabled={disablePrev}>←</button>
-        <button onClick={onNext} disabled={disableNext}>→</button>
+        <button onClick={onPrev} disabled={disablePrev}>
+          ←
+        </button>
+        <button onClick={onNext} disabled={disableNext}>
+          →
+        </button>
       </div>
     </div>
   );
