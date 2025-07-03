@@ -3,10 +3,10 @@ import "./ExplanationFlipCard.css";
 import { useSelector } from "react-redux";
 import { HelperUtilities } from "../../utilities/HelperUtilities";
 
-const ExplanationFlipCard = ({ onCardFlip }) => {
+const ExplanationFlipCard = ({ onCardFlip, showSimplified }) => {
   const { fakeShieldData } = useSelector((store) => store);
   const { qwenData } = useSelector((store) => store);
-  const [showSimplified, setShowSimplified] = useState(false);
+  
 
   return (
     <div className="flip-card-container">
@@ -17,12 +17,7 @@ const ExplanationFlipCard = ({ onCardFlip }) => {
             <h2 className="section-title">🔬 Complex Explanation</h2>
             <button
               className="card-toggle-button"
-              onClick={() => {
-                setShowSimplified(true);
-                if (onCardFlip) {
-                  onCardFlip();
-                }
-              }}
+              onClick={() =>  onCardFlip()}
             >
               View Simplified Explanations →
             </button>
@@ -74,7 +69,7 @@ const ExplanationFlipCard = ({ onCardFlip }) => {
             <h2 className="section-title">✨ Simplified Explanations</h2>
             <button
               className="card-toggle-button"
-              onClick={() => setShowSimplified(false)}
+              onClick={() => onCardFlip()}
             >
               ← View Complex Explanation
             </button>

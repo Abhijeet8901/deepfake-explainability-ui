@@ -18,6 +18,7 @@ const SurveyPage = ({ currentImage, currentImageIndex, onSubmitImage }) => {
   const [explanabilityCardFlipped, setExplanabilityCardExplained] =
     useState(false);
   const [imageAnalysed, setImageAnalyzed] = useState(false);
+  const [showSimplified, setShowSimplified] = useState(false);
 
   const currentQuestion = SurveyImageQuestions[currentQuestionIndex];
 
@@ -57,6 +58,7 @@ const SurveyPage = ({ currentImage, currentImageIndex, onSubmitImage }) => {
   };
 
   const onCardFlip = () => {
+    setShowSimplified(!showSimplified);
     setExplanabilityCardExplained(true);
   };
 
@@ -147,7 +149,7 @@ const SurveyPage = ({ currentImage, currentImageIndex, onSubmitImage }) => {
 
         {/* Right Column: Explanation and Question */}
         <div className="explanation-column">
-          <ExplanationFlipCard onCardFlip={onCardFlip} />
+          <ExplanationFlipCard onCardFlip={onCardFlip} showSimplified={showSimplified} />
           {imageAnalysed ? (
             <div className="survey-card-container">
               <SurveyCard
@@ -193,6 +195,7 @@ const SurveyPage = ({ currentImage, currentImageIndex, onSubmitImage }) => {
               setCurrentQuestionIndex(0);
               setImageAnalyzed(false);
               setExplanabilityCardExplained(false);
+              setShowSimplified(false);
             }}
           >
             Submit & Next →
