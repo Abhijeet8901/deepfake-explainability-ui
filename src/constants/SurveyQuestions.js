@@ -30,7 +30,7 @@ export const SurveyImageQuestions = [
   {
     type: "likert",
     question:
-      "5) Compared to the complex explanation, the simplified explanation reduce the mental effort needed to understand why the image was manipulated.",
+      "5) Compared to the complex explanation, the simplified explanation reduced the mental effort needed to understand why the image was manipulated.",
     options: [
       "Strongly Disagree",
       "Disagree",
