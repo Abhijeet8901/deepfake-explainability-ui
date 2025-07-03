@@ -1,0 +1,9 @@
+```json
+{
+  "Swimming pool": {
+    "simple_explanation": "The swimming pool looks fake because it doesn't fit with the rest of the scene. It's too bright and smooth, and it doesn't have shadows that match the rest of the image.",
+    "edit_instruction": "Remove the swimming pool.",
+    "emoji": "🏊‍♂️"
+  }
+}
+```

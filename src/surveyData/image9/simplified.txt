@@ -1,0 +1,9 @@
+```json
+{
+  "Stop sign": {
+    "simple_explanation": "The word 'HARPER' looks like it was added later because it doesn't fit naturally with the rest of the image.",
+    "edit_instruction": "Remove the word 'HARPER' from the stop sign.",
+    "emoji": "🛑"
+  }
+}
+```

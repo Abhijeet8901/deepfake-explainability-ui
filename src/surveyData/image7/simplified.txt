@@ -1,0 +1,9 @@
+```json
+{
+  "Spoon": {
+    "simple_explanation": "The spoon looks fake because its lighting doesn't match the rest of the scene, and it lacks natural reflections and shadows.",
+    "edit_instruction": "Remove the spoon from the plate.",
+    "emoji": "🥄"
+  }
+}
+```

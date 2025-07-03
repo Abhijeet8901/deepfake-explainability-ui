@@ -1,0 +1,14 @@
+```json
+{
+  "UFO with sunglasses": {
+    "simple_explanation": "The UFO with sunglasses looks fake because it doesn't fit naturally in the scene. It's like putting a toy on top of a real cow.",
+    "edit_instruction": "Remove the UFO with sunglasses from the screen.",
+    "emoji": "🛸"
+  },
+  "Soccer ball": {
+    "simple_explanation": "The soccer ball looks fake because it's too bright and shiny compared to the rest of the image. It's like having a shiny toy in a photo of cows.",
+    "edit_instruction": "Remove the soccer ball from the screen.",
+    "emoji": "⚽"
+  }
+}
+```

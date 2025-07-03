@@ -1,0 +1,9 @@
+```json
+{
+  "Background": {
+    "simple_explanation": "The background looks fake because the lighting doesn't match and the mountains look too smooth.",
+    "edit_instruction": "Remove the background and replace it with a realistic snowy mountain landscape.",
+    "emoji": "🏔️"
+  }
+}
+```

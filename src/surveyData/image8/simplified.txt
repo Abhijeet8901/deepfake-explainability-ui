@@ -1,0 +1,9 @@
+```json
+{
+  "Zebra": {
+    "simple_explanation": "The zebra looks fake because its lighting doesn't match the rest of the scene, and its reflection in the water doesn't look real.",
+    "edit_instruction": "Remove the zebra from the image.",
+    "emoji": "🦓"
+  }
+}
+```

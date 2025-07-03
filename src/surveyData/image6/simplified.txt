@@ -1,0 +1,9 @@
+```json
+{
+  "Rocks or boulders": {
+    "simple_explanation": "The rocks or boulders look fake because their shadows and details don't match the rest of the image, and they're too sharp and not in the right place.",
+    "edit_instruction": "Remove the rocks or boulders from the image.",
+    "emoji": "🪨"
+  }
+}
+```
