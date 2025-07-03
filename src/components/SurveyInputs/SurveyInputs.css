@@ -10,17 +10,6 @@
   margin-right: auto;
 }
 
-/* .survey-scale-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1rem;
-  align-items: center;
-  justify-content: flex-start; 
-  margin-left: 0;
-  margin-right: 0;
-}  */
-
 .survey-scale-option {
   padding: 0.6rem 1rem;
   border: 1px solid #ccc;

@@ -5,7 +5,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  /* gap: 1.25rem; */
   font-family: 'Inter', sans-serif;
   margin-top: 2rem;
   max-width: 100%;
@@ -69,4 +69,24 @@
 .survey-nav-inline button:disabled {
   background: #ccc;
   cursor: not-allowed;
+}
+
+.survey-scale-labels-row {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 0.5rem auto;
+  font-size: 0.85rem;
+  color: #666;
+  padding: 0 0.25rem;
+}
+
+.scale-end-label {
+  width: 100px;
+  text-align: center;
+}
+
+.survey-upper-labels {
+  width: 546px;
+  display: flex;
+  justify-content: space-between;
 }

@@ -1,0 +1,40 @@
+.email-page-container {
+  max-width: 500px;
+  margin: 100px auto;
+  padding: 2rem;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.email-input {
+  padding: 0.75rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.email-error {
+  color: red;
+  margin-top: 0.5rem;
+}
+
+.email-submit-btn {
+  margin-top: 1.5rem;
+  padding: 0.75rem 2rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.email-submit-btn:hover {
+  background-color: #2563eb;
+}

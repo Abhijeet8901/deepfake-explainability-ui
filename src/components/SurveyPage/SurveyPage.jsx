@@ -6,6 +6,7 @@ import "react-before-after-slider-component/dist/build.css";
 import ExplanationFlipCard from "../ExplanationFlipCard/ExplanationFlipCard";
 import SurveyCard from "../SurveyCard/SurveyCard";
 import { SurveyImageQuestions } from "../../constants/SurveyQuestions";
+import { surveyData } from "../../surveyData"; 
 
 const SurveyPage = ({ currentImage, currentImageIndex, onSubmitImage }) => {
   const { qwenData } = useSelector((store) => store);
@@ -13,9 +14,13 @@ const SurveyPage = ({ currentImage, currentImageIndex, onSubmitImage }) => {
   const { step1XData } = useSelector((store) => store);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [explanabilityCardFlipped, setExplanabilityCardExplained] =
+    useState(false);
+  const [imageAnalysed, setImageAnalyzed] = useState(false);
+
   const currentQuestion = SurveyImageQuestions[currentQuestionIndex];
 
-  const [answers, setAnswers] = useState({});
   const handleAnswerChange = (newValue, type, index) => {
     if (type === "scale10") {
       const currVal = answers[currentQuestionIndex] || [null, null, null];
@@ -51,6 +56,10 @@ const SurveyPage = ({ currentImage, currentImageIndex, onSubmitImage }) => {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
   };
 
+  const onCardFlip = () => {
+    setExplanabilityCardExplained(true);
+  };
+
   const FIRST_IMAGE = {
     imageUrl: currentImage
   };
@@ -63,6 +72,16 @@ const SurveyPage = ({ currentImage, currentImageIndex, onSubmitImage }) => {
 
   return (
     <div className="survey-container">
+      <div className="survey-progress-bar-container">
+        <div
+          className="survey-progress-bar-fill"
+          style={{
+            width: `${
+              ((currentImageIndex + 1) / surveyData.length) * 100
+            }%`
+          }}
+        />
+      </div>
       <div className="survey-content-wrapper">
         {/* Left Column: Stacked Images */}
         <div className="survey-image-stack-column">
@@ -128,26 +147,43 @@ const SurveyPage = ({ currentImage, currentImageIndex, onSubmitImage }) => {
 
         {/* Right Column: Explanation and Question */}
         <div className="explanation-column">
-          <ExplanationFlipCard />
-          <div className="survey-card-container">
-            <SurveyCard
-              question={currentQuestion.question}
-              type={currentQuestion.type}
-              options={currentQuestion.options}
-              labels={currentQuestion.labels}
-              value={
-                answers[currentQuestionIndex] ||
-                (currentQuestion.type === "scale10" ? [null, null, null] : null)
-              }
-              onChange={handleAnswerChange}
-              onPrev={handlePrev}
-              onNext={handleNext}
-              disablePrev={currentQuestionIndex === 0}
-              disableNext={
-                currentQuestionIndex === SurveyImageQuestions.length - 1
-              }
-            />
-          </div>
+          <ExplanationFlipCard onCardFlip={onCardFlip} />
+          {imageAnalysed ? (
+            <div className="survey-card-container">
+              <SurveyCard
+                question={currentQuestion.question}
+                type={currentQuestion.type}
+                options={currentQuestion.options}
+                labels={currentQuestion.labels}
+                value={
+                  answers[currentQuestionIndex] ||
+                  (currentQuestion.type === "scale10"
+                    ? [null, null, null]
+                    : null)
+                }
+                onChange={handleAnswerChange}
+                onPrev={handlePrev}
+                onNext={handleNext}
+                disablePrev={currentQuestionIndex === 0}
+                disableNext={
+                  currentQuestionIndex === SurveyImageQuestions.length - 1
+                }
+              />
+            </div>
+          ) : (
+            <div className="survey-analyzed-button-container">
+              <button
+                className="survey-analyze-button"
+                disabled={!explanabilityCardFlipped}
+                onClick={() => {
+                  setImageAnalyzed(true);
+                }}
+              >
+                I have Analysed
+              </button>
+            </div>
+          )}
+
           <button
             className="survey-submit-button"
             disabled={!allAnswered}
@@ -155,6 +191,8 @@ const SurveyPage = ({ currentImage, currentImageIndex, onSubmitImage }) => {
               onSubmitImage(answers);
               setAnswers({});
               setCurrentQuestionIndex(0);
+              setImageAnalyzed(false);
+              setExplanabilityCardExplained(false);
             }}
           >
             Submit & Next →
