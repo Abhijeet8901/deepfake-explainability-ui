@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./IntroPage.css";
 
 const IntroPage = ({ onContinue }) => {
+  const [videoConfirmed, setVideoConfirmed] = useState(false);
+
   return (
     <div className="intro-page-container">
       <h2>Welcome to the Survey</h2>
@@ -16,7 +18,10 @@ const IntroPage = ({ onContinue }) => {
         </p>
         <p>
           <strong>Task:</strong>{" "}
-          <em>Please watch the short video below (under 1 minute) before continuing. </em>
+          <em>
+            Please watch the short video below (under 1 minute) before
+            continuing.{" "}
+          </em>
         </p>
         <div className="video-wrapper">
           <iframe
@@ -27,56 +32,73 @@ const IntroPage = ({ onContinue }) => {
             allowFullScreen
           />
         </div>
+        <div className="video-confirmation-wrapper">
+          <input
+            type="checkbox"
+            id="video-confirm"
+            checked={videoConfirmed}
+            onChange={(e) => setVideoConfirmed(e.target.checked)}
+          />
+          <label htmlFor="video-confirm">
+            <span className="required-asterisk">*</span> I have watched the
+            video above
+          </label>
+        </div>
       </section>
 
-        <section>
+      <section>
         <h3>Benefits</h3>
         <p>
-           Your participation will help advance the creation of more inclusive deepfake detection tools. 
+          Your participation will help advance the creation of more inclusive
+          deepfake detection tools.
         </p>
       </section>
       <section>
         <h3>Eligibility</h3>
         <p>
-          You must be 18 years of age or older to fill this survey. 
-          You should be unfamiliar with AI based Deepfake detection tools. 
+          You must be 18 years of age or older to fill this survey. You should
+          be unfamiliar with AI based Deepfake detection tools.
         </p>
       </section>
 
       <section>
         <h3>Potential Risks</h3>
         <p>
-          Your participation is strictly voluntary and anonymous. 
-          There are no major risks, only feelings of discomfort could be experienced 
-          when taking part in the study due to looking at the computer screen. 
+          Your participation is strictly voluntary and anonymous. There are no
+          major risks, only feelings of discomfort could be experienced when
+          taking part in the study due to looking at the computer screen.
         </p>
       </section>
 
       <section>
         <h3>Withdrawing from the Study</h3>
         <p>
-           You can withdraw from this study at any time while filling the form simply by closing this form link, 
-           but once you submit the responses, since they are anonymous, they can’t be removed from the database. 
-           So, by clicking the submit button at the end, 
-           you consent to the storage and use of your responses to the questionnaire for research purposes. 
+          You can withdraw from this study at any time while filling the form
+          simply by closing this form link, but once you submit the responses,
+          since they are anonymous, they can’t be removed from the database. So,
+          by clicking the submit button at the end, you consent to the storage
+          and use of your responses to the questionnaire for research purposes.
         </p>
       </section>
 
       <section>
         <h3>Confidentiality and Data Storage</h3>
         <p>
-          This survey is completely anonymous. 
-          Only your responses to questions will be collected (in a fully anonymised format) and stored for a period of 5 years in Monash servers. 
-          The data collected will be kept confidential, under the supervision and responsibility of the Monash researchers, 
-          and will be used only for research purposes. After this period, the survey data will be deleted. 
+          This survey is completely anonymous. Only your responses to questions
+          will be collected (in a fully anonymised format) and stored for a
+          period of 5 years in Monash servers. The data collected will be kept
+          confidential, under the supervision and responsibility of the Monash
+          researchers, and will be used only for research purposes. After this
+          period, the survey data will be deleted.
         </p>
       </section>
 
       <section>
         <h3>Results Dissemination</h3>
         <p>
-          Only aggregated statistics will be reported in a scientific paper because of this study. 
-          No personally identifiable information will be collected or used in the publication/dissemination of the results.
+          Only aggregated statistics will be reported in a scientific paper
+          because of this study. No personally identifiable information will be
+          collected or used in the publication/dissemination of the results.
         </p>
       </section>
 
@@ -116,7 +138,11 @@ const IntroPage = ({ onContinue }) => {
         </ul>
       </section>
 
-      <button className="intro-continue-button" onClick={onContinue}>
+      <button
+        className="intro-continue-button"
+        onClick={onContinue}
+        disabled={!videoConfirmed}
+      >
         I Understand and Wish to Continue
       </button>
     </div>
