@@ -16,12 +16,12 @@ const IntroPage = ({ onContinue }) => {
         </p>
         <p>
           <strong>Task:</strong>{" "}
-          <em>Please watch the video below before continuing.</em>
+          <em>Please watch the short video below (under 1 minute) before continuing. </em>
         </p>
         <div className="video-wrapper">
           <iframe
-            src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-            title="Survey Task Video"
+            src="https://www.youtube.com/embed/dYZhRE5XBwQ"
+            title="Deepfake Explanation Survey - Task"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
