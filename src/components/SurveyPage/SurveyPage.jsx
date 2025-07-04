@@ -181,7 +181,7 @@ const SurveyPage = ({ currentImage, currentImageIndex, onSubmitImage }) => {
                   setImageAnalyzed(true);
                 }}
               >
-                I have Analysed
+                Answer Questions
               </button>
             </div>
           )}
