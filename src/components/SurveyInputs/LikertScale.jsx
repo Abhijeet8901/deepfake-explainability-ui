@@ -1,18 +1,11 @@
 import React from 'react';
 import './SurveyInputs.css';
 
-const LikertScale = ({ value, onChange }) => {
-  const choices = [
-  "Strongly Disagree",
-  "Disagree",
-  "Neutral",
-  "Agree",
-  "Strongly Agree"
-]
+const LikertScale = ({ value, onChange, options }) => {
 
   return (
     <div className="survey-scale-wrapper">
-      {choices.map((number) => (
+      {options.map((number) => (
         <label
           key={number}
           className={`survey-scale-option ${value === number ? 'selected' : ''}`}

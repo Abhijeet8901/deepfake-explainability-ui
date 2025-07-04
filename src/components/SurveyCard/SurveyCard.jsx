@@ -25,6 +25,7 @@ const SurveyCard = ({
           <LikertScale
             onChange={(number) => onChange(number, type)}
             value={value}
+            options={options}
           />
         );
       case "scale10":

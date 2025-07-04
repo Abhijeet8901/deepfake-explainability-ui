@@ -55,7 +55,7 @@ export const SurveyToolQuestions = [
   },
   {
     type: "likert",
-    question: "2) If available, how likely are you to use a tool like this in real-world scenarios (e.g., checking images on social media or news websites).",
+    question: "2) If available, I would like to use a tool like this in real-world scenarios (e.g., checking images on social media or news websites).",
      options: [
       "Strongly Disagree",
       "Disagree",
@@ -67,5 +67,30 @@ export const SurveyToolQuestions = [
   {
     type: "text",
     question: "3) Do you have any suggestions or feedback for improving the tool or survey?",
+  },
+];
+
+export const PreSurveyQuestions = [
+  {
+    type: "likert",
+    question: "1) How familiar are you with the concept of deepfakes?",
+    options: [
+      "Not Familiar",
+      "Somewhat Familiar",
+      "Familiar",
+      "Very Familiar",
+      "Extremely Familiar",
+    ],
+  },
+  {
+    type: "likert",
+    question: "2) How familiar are you with tools used for deepfake detection?",
+    options: [
+      "Not Familiar",
+      "Somewhat Familiar",
+      "Familiar",
+      "Very Familiar",
+      "Extremely Familiar",
+    ],
   },
 ];

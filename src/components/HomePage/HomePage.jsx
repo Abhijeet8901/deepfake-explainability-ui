@@ -7,6 +7,7 @@ import { PRELOAD_SURVEY_DATA } from "../../Redux/Store";
 import {
   fetchUserProgress,
   logImageAnswers,
+  logPreSurveyAnswers,
   logToolAnswers
 } from "../../utilities/SurveyLogger";
 import FinalQuestionsPage from "../FinalQuestionsPage/FinalQuestionsPage";
@@ -14,6 +15,7 @@ import { PAGES } from "../../constants/Pages";
 import EmailPage from "../EmailPage/EmailPage";
 import LoadingSurveyPage from "../LoadingSurveyPage/LoadingSurveyPage";
 import IntroPage from "../IntroPage/IntroPage";
+import PreSurveyPage from "../PreSurveyPage/PreSurveyPage";
 
 const HomePage = () => {
   const [currentImage, setCurrentImage] = useState(null);
@@ -43,6 +45,9 @@ const HomePage = () => {
   }, [participantId]);
 
   useEffect(() => {
+    if(userProgressData.preSurveyCompleted) {
+      setCurrentPage(PAGES.SURVEY_PAGE);
+    }
     if (userProgressData.lastImageIndex < surveyData.length) {
       setCurrentImageIndex(userProgressData.lastImageIndex);
     } else if (!userProgressData.finalCompleted) {
@@ -102,12 +107,23 @@ const HomePage = () => {
     const hashedId = await hashEmail(email);
 
     setParticipantId(hashedId);
-    setCurrentPage(PAGES.SURVEY_PAGE);
+    setCurrentPage(PAGES.PRE_SURVEY_PAGE);
   };
 
   const onIntroSubmit = () => {
     setCurrentPage(PAGES.EMAIL_PAGE);
   }
+
+  const onSubmitPreSurvey = async (preSurveyAnswers) => {
+
+    setCurrentPage(PAGES.SURVEY_PAGE);
+
+    await logPreSurveyAnswers({
+      participantId: participantId,
+      preSurveyAnswers
+    });
+  }
+    
 
   const renderPage = () => {
     if (userProgressData.loading) {
@@ -118,6 +134,8 @@ const HomePage = () => {
         return <IntroPage onContinue={onIntroSubmit} />;
       case PAGES.EMAIL_PAGE:
         return <EmailPage onSubmit={onEmailSubmit} />;
+      case PAGES.PRE_SURVEY_PAGE:
+        return <PreSurveyPage onSubmitPreSurvey={onSubmitPreSurvey} />;  
       case PAGES.SURVEY_PAGE:
         return (
           <SurveyPage
