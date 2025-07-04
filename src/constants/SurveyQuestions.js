@@ -18,7 +18,7 @@ export const SurveyImageQuestions = [
   },
   {
     type: "likert",
-    question: '4) The reconstructed image shown below (labeled <i>"What AI Thinks It Should Look Like"</i>) helped me understand why the original image might be manipulated.',
+    question: '4) The reconstructed image shown on the bottom left of the screen (labeled <i>"🧠 What AI Thinks It Should Look Like"</i>) helped me understand why the original image might be manipulated.',
     options: [
       "Strongly Disagree",
       "Disagree",
