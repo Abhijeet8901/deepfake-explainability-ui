@@ -1,0 +1,9 @@
+```json
+{
+  "Yellow flower": {
+    "simple_explanation": "The yellow flower looks fake because its colors and patterns don't match the red leaves around it. It also doesn't blend well with the rest of the image.",
+    "edit_instruction": "Remove the yellow flower.",
+    "emoji": "🌼"
+  }
+}
+```

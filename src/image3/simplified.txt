@@ -1,0 +1,9 @@
+```json
+{
+  "Central Teddy Bear": {
+    "simple_explanation": "The central teddy bear looks fake because its fur doesn't match the others, and it has smooth edges that aren't natural.",
+    "edit_instruction": "Remove the central teddy bear.",
+    "emoji": "🧸"
+  }
+}
+```
