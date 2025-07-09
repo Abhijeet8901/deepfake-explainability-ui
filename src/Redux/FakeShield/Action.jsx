@@ -37,15 +37,13 @@ export const runFakeShieldMFLM = (image, explanation) => async (dispatch) => {
         pil_img: image, 
         explanation: explanation
     });
-
-    const result = require('../../image1/mask2.jpg');
     
     console.log(result.data);
     dispatch({
         type: RUN_FAKESHIELD_MFLM_SUCCESS,
         payload: {
-            label: 1,
-            mask: result
+            label: result.data[0].label,
+            mask: result.data[1].url
         }
     });  
 
