@@ -4,8 +4,6 @@ import {
     RUN_STEP1X_SUCCESS 
 } from "./ActionType"
 
-// const recon = require('../../image3/reconstructed.jpg');
-
 const initialState = {
     generated_image: null,
     loading: false,

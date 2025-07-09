@@ -4,12 +4,6 @@ import {
     RUN_QWEN_SUCCESS 
 } from "./ActionType"
 
-// const exp = {
-//     "Central Teddy Bear": {
-//         "simple_explanation": "The central teddy bear looks fake because its fur doesn't match the others, and it has smooth edges that aren't natural.",
-//         "emoji": "🧸",
-//     }
-// }
 const initialState = {
     explanations: {},
     edit_instructions: null,
@@ -77,8 +71,7 @@ const processQwenExplanations = (json_str) => {
     for (const [key, value] of Object.entries(data)) {
       if (value && typeof value === 'object' && value.simple_explanation) {
         result[key] = {
-          simple_explanation: "The yellow flower looks fake because its colors and patterns don't match the red leaves around it. It also doesn't blend well with the rest of the image.",
-          //value.simple_explanation?.trim() || '',
+          simple_explanation: value.simple_explanation?.trim() || '',
           edit_instruction: value.edit_instruction?.trim() || '',
           emoji: value.emoji || '🕵️'
         }

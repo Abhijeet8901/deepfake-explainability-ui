@@ -32,11 +32,11 @@ export const runFakeShieldMFLM = (image, explanation) => async (dispatch) => {
   try {
     dispatch({type: RUN_FAKESHIELD_MFLM_REQUEST});
                                 
-    // const client = await Client.connect(FAKESHIELD_MFLM_BASE_URL);
-    // const result = await client.predict("/mask", {
-    //     pil_img: image, 
-    //     explanation: explanation
-    // });
+    const client = await Client.connect(FAKESHIELD_MFLM_BASE_URL);
+    const result = await client.predict("/mask", {
+        pil_img: image, 
+        explanation: explanation
+    });
 
     const result = require('../../image1/mask2.jpg');
     
